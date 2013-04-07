@@ -173,6 +173,9 @@ Generator.prototype.writeIndex = function writeIndex() {
 
   // append the default content
   this.indexFile = this.indexFile.replace('<body>', '<body>\n' + contentText.join('\n'));
+
+  // fix whitespace that was added by this.appendScripts
+  this.indexFile = this.indexFile.replace(/    /g, '\t');
 };
 
 Generator.prototype.bootstrapJs = function bootstrapJs() {
@@ -221,6 +224,9 @@ Generator.prototype.writeIndexWithRequirejs = function writeIndexWithRequirejs()
 
   // append the default content
   this.indexFile = this.indexFile.replace('<body>', '<body>\n' + contentText.join('\n'));
+
+  // fix whitespace that was added by this.appendScripts
+  this.indexFile = this.indexFile.replace(/    /g, '\t');
 };
 
 Generator.prototype.setupEnv = function setupEnv() {
