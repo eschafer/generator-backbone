@@ -99,7 +99,7 @@ Generator.prototype.packageJSON = function packageJSON() {
 
 Generator.prototype.mainStylesheet = function mainStylesheet() {
   if (this.compassBootstrap) {
-    this.write('app/styles/main.scss', '@import \'sass-bootstrap/lib/bootstrap\';\n\n.hero-unit {\n    margin: 50px auto 0 auto;\n    width: 300px;\n}');
+    this.write('app/styles/main.scss', '@import "sass-bootstrap/lib/bootstrap";\n\n.hero-unit {\n	margin: 50px auto 0 auto;\n	width: 300px;\n}');
   } else {
     this.write('app/styles/main.css', 'body {\n    background: #fafafa;\n}\n\n.hero-unit {\n    margin: 50px auto 0 auto;\n    width: 300px;\n}');
   }
@@ -117,11 +117,11 @@ Generator.prototype.writeIndex = function writeIndex() {
   // prepare default content text
   var defaults = ['HTML5 Boilerplate', 'jQuery', 'Backbone.js', 'Underscore.js'];
   var contentText = [
-    '        <div class="container">',
-    '            <div class="hero-unit">',
-    '                <h1>\'Allo, \'Allo!</h1>',
-    '                <p>You now have</p>',
-    '                <ul>'
+    '		<div class="container">',
+    '			<div class="hero-unit">',
+    '				<h1>\'Allo, \'Allo!</h1>',
+    '				<p>You now have</p>',
+    '				<ul>'
   ];
 
 
@@ -149,7 +149,7 @@ Generator.prototype.writeIndex = function writeIndex() {
       'components/sass-bootstrap/js/bootstrap-tab.js'
     ]);
 
-    contentText.push('                    <li>Twitter Bootstrap</li>');
+    contentText.push('					<li>Twitter Bootstrap</li>');
   }
 
   this.indexFile = this.appendScripts(this.indexFile, 'scripts/main.js', [
@@ -159,15 +159,15 @@ Generator.prototype.writeIndex = function writeIndex() {
 
   // iterate over defaults and create content string
   defaults.forEach(function (el) {
-    contentText.push('                    <li>' + el  +'</li>');
+    contentText.push('					<li>' + el  +'</li>');
   });
 
   contentText = contentText.concat([
-    '                </ul>',
-    '                <p>installed.</p>',
-    '                <h3>Enjoy coding! - Yeoman</h3>',
-    '            </div>',
-    '        </div>',
+    '				</ul>',
+    '				<p>installed.</p>',
+    '				<h3>Enjoy coding! - Yeoman</h3>',
+    '			</div>',
+    '		</div>',
     ''
   ]);
 
@@ -190,11 +190,11 @@ Generator.prototype.writeIndexWithRequirejs = function writeIndexWithRequirejs()
   // prepare default content text
   var defaults = ['HTML5 Boilerplate', 'jQuery', 'Backbone.js', 'Underscore.js', 'RequireJS'];
   var contentText = [
-    '        <div class="container">',
-    '            <div class="hero-unit">',
-    '                <h1>\'Allo, \'Allo!</h1>',
-    '                <p>You now have</p>',
-    '                <ul>'
+    '		<div class="container">',
+    '			<div class="hero-unit">',
+    '				<h1>\'Allo, \'Allo!</h1>',
+    '				<p>You now have</p>',
+    '				<ul>'
   ];
 
   if (this.compassBootstrap) {
@@ -207,15 +207,15 @@ Generator.prototype.writeIndexWithRequirejs = function writeIndexWithRequirejs()
 
     // iterate over defaults and create content string
   defaults.forEach(function (el) {
-    contentText.push('                    <li>' + el  +'</li>');
+    contentText.push('					<li>' + el  +'</li>');
   });
 
   contentText = contentText.concat([
-    '                </ul>',
-    '                <p>installed.</p>',
-    '                <h3>Enjoy coding! - Yeoman</h3>',
-    '            </div>',
-    '        </div>',
+    '				</ul>',
+    '				<p>installed.</p>',
+    '				<h3>Enjoy coding! - Yeoman</h3>',
+    '			</div>',
+    '		</div>',
     ''
   ]);
 
@@ -242,56 +242,58 @@ Generator.prototype.mainJs = function mainJs(){
   }
 
   var mainJsFile = [
-    '/*global require*/',
-    '\'use strict\';',
-    '',
-    'require.config({',
-    '    shim: {',
-    '        underscore: {',
-    '            exports: \'_\'',
-    '        },',
-    '        backbone: {',
-    '            deps: [',
-    '               \'underscore\',',
-    '              \'jquery\'',
-    '            ],',
-    '            exports: \'Backbone\'',
-    '        },',
+    '(function() {',
+    '	/*global require*/',
+    '	"use strict";',
+    '	',
+    '	require.config({',
+    '		shim: {',
+    '			underscore: {',
+    '				exports: "_"',
+    '			},',
+    '			backbone: {',
+    '				deps: [',
+    '					"underscore",',
+    '					"jquery"',
+    '				],',
+    '				exports: "Backbone"',
+    '			},',
   ];
 
   if(this.compassBootstrap){
     mainJsFile.push(
-      '        bootstrap: {',
-      '            deps: [\'jquery\'],',
-      '            exports: \'jquery\'',
-      '        }'
+      '			bootstrap: {',
+      '				deps: ["jquery"],',
+      '				exports: "jquery"',
+      '			}'
     );
   }
 
   mainJsFile.push(
-    '    },',
-    '    paths: {',
-    '        jquery: \'../components/jquery/jquery\',',
-    '        backbone: \'../components/backbone-amd/backbone\',',
-    '        underscore: \'../components/underscore-amd/underscore\','
+    '		},',
+    '		paths: {',
+    '			jquery: "../components/jquery/jquery",',
+    '			backbone: "../components/backbone-amd/backbone",',
+    '			underscore: "../components/underscore-amd/underscore",'
   );
 
   if(this.compassBootstrap){
-    mainJsFile.push('        bootstrap: \'vendor/bootstrap\'');
+    mainJsFile.push('			bootstrap: "vendor/bootstrap"');
   }
 
   mainJsFile.push(
-    '    }',
-    '});'
+    '		}',
+    '	});'
   );
 
   mainJsFile.push(
-    '',
-    'require([',
-    '  \'backbone\'',
-    '], function (Backbone) {',
-    '',
-    '});'
+    '	',
+    '	require([',
+    '		"backbone"',
+    '	], function (Backbone) {',
+    '		console.log(Backbone);',
+    '	});',
+    '}());'
   );
 
   this.write('app/scripts/main.js', mainJsFile.join('\n'));
