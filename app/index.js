@@ -296,3 +296,13 @@ Generator.prototype.mainJs = function mainJs(){
 
   this.write('app/scripts/main.js', mainJsFile.join('\n'));
 };
+
+Generator.prototype.customize = function customize(){
+  this.write('app/index.html', this.engine(this.read('../../../../app/index.html')).replace(/>\s+<html/, '><html').replace(/    /g, '\t'));
+  this.write('app/404.html', this.engine(this.read('../../../../app/404.html')).replace(/    /g, '\t'));
+
+  this.write('app/scripts/main.js', this.engine(this.read('../../../../app/scripts/main.js')).replace(/'/g, '"').replace(/    /g, '\t').replace(/  /g, '\t').replace(/\], function \(Backbone\) \{/, '], function (Backbone) {\n\tconsole.log("Backbone " + Backbone.VERSION);'));
+  this.write('app/scripts/templates.js', this.engine(this.read('../../../../app/scripts/templates.js')).replace(/.*/, 'this.JST = this.JST || {};\n'));
+
+  this.write('app/styles/main.scss', this.engine(this.read('../../../../app/styles/main.scss')).replace(/.*/, '@import "sass-bootstrap/lib/bootstrap";\n'));
+};
