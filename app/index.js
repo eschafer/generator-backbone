@@ -298,7 +298,7 @@ Generator.prototype.mainJs = function mainJs(){
 };
 
 Generator.prototype.customize = function customize(){
-  this.write('app/index.html', this.engine(this.read('../../../../app/index.html')).replace(/>\s+<html/, '><html').replace(/    /g, '\t'));
+  this.write('app/index.html', this.engine(this.read('../../../../app/index.html')).replace(/>\s+<html/, '><html').replace(/    /g, '\t').replace(/data-main="scripts\/main.js"/, 'data-main="scripts/main"'));
   this.write('app/404.html', this.engine(this.read('../../../../app/404.html')).replace(/    /g, '\t'));
 
   this.write('app/scripts/main.js', this.engine(this.read('../../../../app/scripts/main.js')).replace(/'/g, '"').replace(/    /g, '\t').replace(/  /g, '\t').replace(/\], function \(Backbone\) \{/, '], function (Backbone) {\n\tconsole.log("Backbone " + Backbone.VERSION);'));
